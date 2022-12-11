@@ -14,31 +14,27 @@
       <h1>{{ message }}</h1>
       <div>
         <div class="input-container">
-            <input type="text" v-model="todo" />
-            <button class="add-btn" @click="addTodo" :disabled="!todo" >Add Todo</button>
-        </div> 
-      <ol class="todo-list">
-        <li v-for="(todo in todos" :key="i" class="todo-item">
-          <!-- <span class="has-line-through">👉 {{ todo.name }}</span> -->
-            <span :class="{'has-line-through': todo.isCompleted}" >👉 {{ todo.name }}</span>
-          <button class="delete-btn" @click="deleteTodo">Delete</button>
-          <button @click="updateTodo(todo)">{{ todo.isCompleted ? "Undo" : "Complete" }}</button>
-        </li>
-      </ol>
-    </div>
-        
-      <!-- <div v-if="isLoading">
-        <h2>Loading...</h2>
-      </div> -->
-      <!-- <div v-else>
-        <div v-for="todo in todos" :key="todo">
-          <input type="checkbox" />
-          {{ todo.title }}
+          <input type="text" v-model="todo" />
+          <button class="add-btn" @click="addTodo" :disabled="!todo">
+            Add Todo
+          </button>
         </div>
-      </div> -->
-      
+        <ol class="todo-list">
+          <li v-for="(todo in todos" :key="i" class="todo-item">
+            <!-- <span class="has-line-through">👉 {{ todo.name }}</span> -->
+            <span :class="{'has-line-through': todo.isCompleted}"
+              >👉 {{ todo.name }}</span
+            >
+            <button class="delete-btn" @click="deleteTodo">Delete</button>
+            <button @click="updateTodo(todo)">
+              {{ todo.isCompleted ? "Undo" : "Complete" }}
+            </button>
+          </li>
+        </ol>
+      </div>
+
     </div>
-    
+
     <script>
       const { createApp } = Vue;
 
@@ -48,48 +44,34 @@
             message: "My Todo app",
             todo: "",
             todos: [
-                {
-                    id: 1,
-                    name: "Buy Bread",
-                    isCompleted: false,
-                },              
+              {
+                id: 1,
+                name: "Buy Bread",
+                isCompleted: false,
+              },
             ],
-            // isLoading: true,
           };
         },
 
         methods: {
-        //   fetchTodos() {
-        //     fetch("https://jsonplaceholder.typicode.com/todos")
-        //       .then((response) => response.json())
-        //       .then((data) => {
-        //         this.todos = data;
-        //       })
-        //       .catch((error) => alert(error.message))
-        //       .finally(() => {
-        //         this.isLoading = false;
-        //       });
-        //   },
-                addTodo() {
-                    this.todos.push({
-                        id: this.todos.length + 1,
-                        name: this.todo,
-                        isCompleted: false,
-                    });
-                    // clear input
-                    this.todo = "";
-                },
-                removeTodo() {},
-                updateTodo(todo) {
-                    todo.isCompleted = !todo.isCompleted
-                },
-                deleteTodo() {
-                    this.todos.pop();
-                },
+          addTodo() {
+            this.todos.push({
+              id: this.todos.length + 1,
+              name: this.todo,
+              isCompleted: false,
+            });
+            // clear input
+            this.todo = "";
+          },
+          removeTodo() {},
+          updateTodo(todo) {
+            todo.isCompleted = !todo.isCompleted;
+          },
+          deleteTodo() {
+            this.todos.pop();
+          },
         },
-        // mounted() {
-        //   this.fetchTodos();
-        // },
+        
       });
 
       result.mount("#app");
